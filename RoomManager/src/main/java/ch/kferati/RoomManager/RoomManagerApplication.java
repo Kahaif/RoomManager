@@ -2,32 +2,18 @@ package ch.kferati.RoomManager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.context.support.GenericWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletRegistration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class RoomManagerApplication implements WebApplicationInitializer {
+public class RoomManagerApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(RoomManagerApplication.class, args);
 	}
 
 	@Override
-	public void onStartup(ServletContext servletContext) {
-
-		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-		context.register(Configurer.class);
-		context.setServletContext(servletContext);
-
-		servletContext.addListener(new ContextLoaderListener(context));
-
-		ServletRegistration.Dynamic appServlet = servletContext.addServlet("dispatcher", new DispatcherServlet(context));
-		appServlet.setLoadOnStartup(1);
-		appServlet.addMapping("/");
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(RoomManagerApplication.class);
 	}
+
 }
