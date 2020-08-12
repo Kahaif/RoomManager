@@ -9,14 +9,17 @@ public class RoomReservations {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	@Column(nullable = false)
 	private LocalDateTime fromDateTime;
+	@Column(nullable = false)
 	private LocalDateTime toDateTime;
-	@Column(nullable = true, length = 500)
+	@Column(length = 500)
 	private String comment;
+	@Column(columnDefinition = "boolean default false", nullable = false)
 	private Boolean validated;
-	@ManyToOne(targetEntity = User.class)
+	@ManyToOne(targetEntity = User.class, optional = false)
 	private User user;
-	@ManyToOne(targetEntity = Room.class)
+	@ManyToOne(targetEntity = Room.class, optional = false)
 	private Room room;
 
 	public Integer getId() {

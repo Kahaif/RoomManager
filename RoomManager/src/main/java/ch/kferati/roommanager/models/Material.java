@@ -7,8 +7,11 @@ public class Material {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	@Column(nullable = false)
 	private String name;
+	@Column(nullable = false)
 	private String serial;
+	@Column(nullable = false, columnDefinition = "boolean default true")
 	private Boolean reservable;
 
 	public Integer getId() {

@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class MainController {
+
 	@Autowired
 	private SessionFactory factory;
+
 	@GetMapping(value = "/")
 	public String home() {
 		Role r = new Role();

@@ -39,7 +39,7 @@ public class HibernateConfiguration {
 	private final Properties hibernateProperties() {
 
 		Properties hibernateProperties = new Properties();
-		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create");
+		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
 		hibernateProperties.setProperty("hibernate.dialect", "ch.kferati.roommanager.data.sqlite.SQLiteDialect");
 		return hibernateProperties;
 	}

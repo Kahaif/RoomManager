@@ -7,8 +7,9 @@ import javax.persistence.Id;
 @Entity(name = "Property")
 public class Property {
 	@Id
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String name;
+	@Column(nullable = false)
 	private String value;
 
 	public String getName() {

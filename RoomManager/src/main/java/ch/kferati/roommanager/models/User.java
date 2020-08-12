@@ -7,9 +7,11 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	@Column(nullable = false)
 	private String mail;
+	@Column(nullable = false)
 	private String password;
-	@ManyToOne(targetEntity = Role.class)
+	@ManyToOne(targetEntity = Role.class, optional = false)
 	private Role role;
 
 	public Integer getId() {

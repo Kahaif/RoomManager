@@ -8,13 +8,17 @@ public class MaterialReservations {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	@Column(nullable = false)
 	private LocalDateTime fromDateTime;
+	@Column(nullable = false)
 	private LocalDateTime toDateTime;
+	@Column(nullable = false)
 	private String comment;
+	@Column(columnDefinition = "boolean default false", nullable = false)
 	private Boolean validated;
-	@ManyToOne(targetEntity = Material.class)
+	@ManyToOne(targetEntity = Material.class, optional = false)
 	private Material material;
-	@ManyToOne(targetEntity = User.class)
+	@ManyToOne(targetEntity = User.class, optional = false)
 	private User user;
 	@ManyToOne(targetEntity = Room.class)
 	private Room room;
