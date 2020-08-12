@@ -7,9 +7,10 @@ import java.time.LocalDateTime;
 public class RoomReservations {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	private LocalDateTime from;
-	private LocalDateTime to;
+	private LocalDateTime fromDateTime;
+	private LocalDateTime toDateTime;
 	@Column(nullable = true, length = 500)
 	private String comment;
 	private Boolean validated;
@@ -27,13 +28,13 @@ public class RoomReservations {
 		this.id = id;
 	}
 
-	public LocalDateTime getFrom() {
-		return from;
+	public LocalDateTime getFromDateTime() {
+		return fromDateTime;
 	}
 
-	public void setFrom(LocalDateTime from) {
-		if (from == null || from.isBefore(LocalDateTime.now())) throw new IllegalArgumentException("from can't be null or after now");
-		this.from = from;
+	public void setFromDateTime(LocalDateTime fromDateTime) {
+		if (fromDateTime == null || fromDateTime.isBefore(LocalDateTime.now())) throw new IllegalArgumentException("fromDateTime can't be null or after now");
+		this.fromDateTime = fromDateTime;
 	}
 
 	public Boolean getValidated() {
@@ -54,13 +55,13 @@ public class RoomReservations {
 		this.comment = comment;
 	}
 
-	public LocalDateTime getTo() {
-		return to;
+	public LocalDateTime getToDateTime() {
+		return toDateTime;
 	}
 
-	public void setTo(LocalDateTime to) {
-		if (to == null || to.isBefore(LocalDateTime.now())) throw new IllegalArgumentException("to can't be null or after now");
-		this.to = to;
+	public void setToDateTime(LocalDateTime toDateTime) {
+		if (toDateTime == null || toDateTime.isBefore(LocalDateTime.now())) throw new IllegalArgumentException("toDateTime can't be null or after now");
+		this.toDateTime = toDateTime;
 	}
 
 	public Room getRoom() {

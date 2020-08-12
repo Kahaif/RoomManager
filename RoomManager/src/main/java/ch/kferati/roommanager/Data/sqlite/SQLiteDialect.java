@@ -4,12 +4,12 @@ import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.function.SQLFunctionTemplate;
 import org.hibernate.dialect.function.StandardSQLFunction;
 import org.hibernate.dialect.function.VarArgsSQLFunction;
-import org.hibernate.type.StringType;
 
 import java.sql.Types;
 
 public class SQLiteDialect extends Dialect {
 	public SQLiteDialect() {
+		super();
 		registerColumnType(Types.BIT, "integer");
 		registerColumnType(Types.TINYINT, "tinyint");
 		registerColumnType(Types.SMALLINT, "smallint");
@@ -34,19 +34,38 @@ public class SQLiteDialect extends Dialect {
 		registerColumnType(Types.CLOB, "clob");
 		registerColumnType(Types.BOOLEAN, "integer");
 
-		registerFunction("concat", new VarArgsSQLFunction(StringType.INSTANCE, "", "||", ""));
-		registerFunction("mod", new SQLFunctionTemplate(StringType.INSTANCE, "?1 % ?2"));
-		registerFunction("substr", new StandardSQLFunction("substr", StringType.INSTANCE));
-		registerFunction("substring", new StandardSQLFunction("substr", StringType.INSTANCE));
+		registerFunction("concat", new VarArgsSQLFunction(org.hibernate.type.StandardBasicTypes.STRING, "",
+				"||", ""));
+		registerFunction("mod", new SQLFunctionTemplate(org.hibernate.type.StandardBasicTypes.INTEGER,
+				"?1 % ?2"));
+		registerFunction("substr", new StandardSQLFunction("substr",
+				org.hibernate.type.StandardBasicTypes.STRING));
+		registerFunction("substring", new StandardSQLFunction("substr",
+				org.hibernate.type.StandardBasicTypes.STRING));
 	}
 
 	public boolean supportsIdentityColumns() {
 		return true;
 	}
 
+    /*
+     public boolean supportsInsertSelectIdentity() {
+     return true; // As specify in NHibernate dialect
+     }
+     */
+
 	public boolean hasDataTypeInIdentityColumn() {
 		return false; // As specify in NHibernate dialect
 	}
+
+    /*
+     public String appendIdentitySelectToInsert(String insertString) {
+     return new StringBuffer(insertString.length()+30). // As specify in NHibernate dialect
+     append(insertString).
+     append("; ").append(getIdentitySelectString()).
+     toString();
+     }
+     */
 
 	public String getIdentityColumnString() {
 		// return "integer primary key autoincrement";
@@ -57,6 +76,14 @@ public class SQLiteDialect extends Dialect {
 		return "select last_insert_rowid()";
 	}
 
+	public boolean supportsLimit() {
+		return true;
+	}
+
+	public String getLimitString(String query, boolean hasOffset) {
+		return new StringBuffer(query.length() + 20).append(query).append(
+				hasOffset ? " limit ? offset ?" : " limit ?").toString();
+	}
 
 	public boolean supportsTemporaryTables() {
 		return true;
@@ -107,22 +134,26 @@ public class SQLiteDialect extends Dialect {
 	}
 
 	public String getDropForeignKeyString() {
-		throw new UnsupportedOperationException("No drop foreign key syntax supported by SQLiteDialect");
+		throw new UnsupportedOperationException(
+				"No drop foreign key syntax supported by SQLiteDialect");
 	}
 
-	public String getAddForeignKeyConstraintString(String constraintName, String[] foreignKey, String referencedTable,
-	                                               String[] primaryKey, boolean referencesPrimaryKey) {
-		throw new UnsupportedOperationException("No add foreign key syntax supported by SQLiteDialect");
+	public String getAddForeignKeyConstraintString(String constraintName,
+	                                               String[] foreignKey, String referencedTable, String[] primaryKey,
+	                                               boolean referencesPrimaryKey) {
+		throw new UnsupportedOperationException(
+				"No add foreign key syntax supported by SQLiteDialect");
 	}
 
 	public String getAddPrimaryKeyConstraintString(String constraintName) {
-		throw new UnsupportedOperationException("No add primary key syntax supported by SQLiteDialect");
+		throw new UnsupportedOperationException(
+				"No add primary key syntax supported by SQLiteDialect");
 	}
 
 	public boolean supportsIfExistsBeforeTableName() {
 		return true;
-	}
 
+	}
 	public boolean supportsCascadeDelete() {
 		return false;
 	}

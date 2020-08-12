@@ -1,11 +1,11 @@
 package ch.kferati.roommanager.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name = "Material")
 public class Material {
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	private String name;
 	private String serial;

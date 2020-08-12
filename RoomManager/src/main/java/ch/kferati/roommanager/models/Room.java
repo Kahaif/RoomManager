@@ -1,12 +1,11 @@
 package ch.kferati.roommanager.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity(name = "Room")
 public class Room {
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	private String name;
 	private Boolean upgradeable;

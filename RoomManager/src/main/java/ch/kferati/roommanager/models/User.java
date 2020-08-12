@@ -1,12 +1,11 @@
 package ch.kferati.roommanager.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity(name = "User")
 public class User {
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	private String mail;
 	private String password;

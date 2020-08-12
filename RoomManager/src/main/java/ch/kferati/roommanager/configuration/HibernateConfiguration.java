@@ -1,6 +1,5 @@
 package ch.kferati.roommanager.configuration;
 
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,15 +24,14 @@ public class HibernateConfiguration {
 	@Bean
 	public DataSource dataSource() {
 		DataSourceBuilder builder = DataSourceBuilder.create();
-		return builder.url("jdbc:sqlite:roommanager.db")
-				.driverClassName("org.sqlite.JDBC").build();
+		return builder.url("jdbc:sqlite:roommanager.db").driverClassName("org.sqlite.JDBC").build();
 
 	}
 
 	private final Properties hibernateProperties() {
 
 		Properties hibernateProperties = new Properties();
-		hibernateProperties.setProperty("hibernate.ddl-auto", "update");
+		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create");
 		hibernateProperties.setProperty("hibernate.dialect", "ch.kferati.roommanager.Data.sqlite.SQLiteDialect");
 		return hibernateProperties;
 	}
