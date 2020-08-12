@@ -11,9 +11,11 @@ public class MaterialReservations {
 	private LocalDateTime to;
 	private String comment;
 	private Boolean validated;
+	@ManyToOne(targetEntity = Material.class)
 	private Material material;
+	@ManyToOne(targetEntity = User.class)
 	private User user;
-	@Column(nullable = true)
+	@ManyToOne(targetEntity = Room.class)
 	private Room room;
 
 	public Integer getId() {

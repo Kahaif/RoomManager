@@ -13,7 +13,9 @@ public class RoomReservations {
 	@Column(nullable = true, length = 500)
 	private String comment;
 	private Boolean validated;
+	@ManyToOne(targetEntity = User.class)
 	private User user;
+	@ManyToOne(targetEntity = Room.class)
 	private Room room;
 
 	public Integer getId() {
