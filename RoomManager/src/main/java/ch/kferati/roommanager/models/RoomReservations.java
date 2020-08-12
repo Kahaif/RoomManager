@@ -1,18 +1,18 @@
-package ch.kferati.RoomManager.models;
+package ch.kferati.roommanager.models;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name = "MaterialReservations")
-public class MaterialReservations {
+@Entity(name = "RoomReservations")
+public class RoomReservations {
+
 	@Id
 	private Integer id;
 	private LocalDateTime from;
 	private LocalDateTime to;
+	@Column(nullable = true, length = 500)
 	private String comment;
 	private Boolean validated;
-	@ManyToOne(targetEntity = Material.class)
-	private Material material;
 	@ManyToOne(targetEntity = User.class)
 	private User user;
 	@ManyToOne(targetEntity = Room.class)
@@ -68,6 +68,7 @@ public class MaterialReservations {
 	}
 
 	public void setRoom(Room room) {
+		if (room == null) throw new IllegalArgumentException("room can't be null");
 		this.room = room;
 	}
 
@@ -78,12 +79,5 @@ public class MaterialReservations {
 	public void setUser(User user) {
 		if (user == null) throw new IllegalArgumentException("user can't be null or after now");
 		this.user = user;
-	}
-	public Material getMaterial() {
-		return material;
-	}
-
-	public void setMaterial(Material material) {
-		this.material = material;
 	}
 }

@@ -1,4 +1,4 @@
-package ch.kferati.RoomManager.models;
+package ch.kferati.roommanager.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

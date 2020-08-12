@@ -1,4 +1,4 @@
-package ch.kferati.RoomManager.Data.sqlite;
+package ch.kferati.roommanager.Data.sqlite;
 
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.function.SQLFunctionTemplate;

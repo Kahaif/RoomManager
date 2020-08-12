@@ -1,4 +1,4 @@
-package ch.kferati.RoomManager;
+package ch.kferati.roommanager;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
