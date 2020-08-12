@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-
-    </head>
-    <body>
-        test
-    </body>
-</html>
+<jsp:include page="head.jsp" />
+<div>hello</div>
+<jsp:include page="foot.jsp" />
