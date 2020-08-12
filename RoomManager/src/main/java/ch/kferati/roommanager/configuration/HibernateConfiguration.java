@@ -3,7 +3,9 @@ package ch.kferati.roommanager.configuration;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -26,6 +28,12 @@ public class HibernateConfiguration {
 		DataSourceBuilder builder = DataSourceBuilder.create();
 		return builder.url("jdbc:sqlite:roommanager.db").driverClassName("org.sqlite.JDBC").build();
 
+	}
+	@Bean
+	public PlatformTransactionManager hibernateTransactionManager() {
+		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+		transactionManager.setSessionFactory(sessionFactory().getObject());
+		return transactionManager;
 	}
 
 	private final Properties hibernateProperties() {
