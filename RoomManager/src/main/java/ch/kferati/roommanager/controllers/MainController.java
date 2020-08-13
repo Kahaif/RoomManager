@@ -1,11 +1,10 @@
 package ch.kferati.roommanager.controllers;
 
 import ch.kferati.roommanager.models.*;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,8 @@ public class MainController {
 
 
 	@GetMapping(value = "/")
-	public String home(HttpServletRequest request) {
+	public String home(Model m, HttpServletRequest request) {
+
 		Role r = new Role();
 		r.setName("abc");
 		r.setPermissions("abc");
@@ -35,6 +35,11 @@ public class MainController {
 			 s.close();
 		}
 
-		return "index";
+		m.addAttribute("brand", "Gestion de salles")
+				.addAttribute("title", "Gestion de salles")
+				.addAttribute("connection", "<li class=\"nav-item\"><a class=\"nav-link\" href=\"/login\">Connexion</a></li>")
+				.addAttribute("head", "<script src=\"/js/calendar.min.js\"></script><script src=\"/js/calendar-locales.min.js\"></script>");
+
+		return "rooms";
 	}
 }
